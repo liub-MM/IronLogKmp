@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "9397094312",
+    "project_id": "iron-bfe80",
+    "storage_bucket": "iron-bfe80.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9397094312:android:09023a9fd9b08995bd7f9d",
+        "android_client_info": {
+          "package_name": "ironlog.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9397094312-vlpeou03jsockbec9sn1pjv3r35u7g1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ironlog.app",
+            "certificate_hash": "b811d14c878b8fc80c6aecad47c69ebd53f50efd"
+          }
+        },
+        {
+          "client_id": "9397094312-8sanhpbv6cajhh48uaphmr7ro0st2l6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYRHddQ6257DpWe49ggjO7uzcN8MV6cd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9397094312-8sanhpbv6cajhh48uaphmr7ro0st2l6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9397094312:android:f6b453eb87b8d1f7bd7f9d",
+        "android_client_info": {
+          "package_name": "ironlogkmp.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9397094312-8sanhpbv6cajhh48uaphmr7ro0st2l6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYRHddQ6257DpWe49ggjO7uzcN8MV6cd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9397094312-8sanhpbv6cajhh48uaphmr7ro0st2l6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
