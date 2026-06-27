@@ -1,4 +1,5 @@
 [versions]
+paging-multiplatform = "3.3.0-alpha02-0.5.1"
 #agp = "8.13.2"
 android-compileSdk = "36"
 android-minSdk = "24"
@@ -27,9 +28,11 @@ kotlin = "2.2.0"
 ksp = "2.2.0-2.0.2"
 agp = "8.10.1"
 paging = "3.3.6"
+buildkonfig = "0.15.1"
 
 [libraries]
-paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+paging-compose-common = { module = "app.cash.paging:paging-compose-common", version.ref = "paging-multiplatform" }
 paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
 room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
 firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseGitLive" }
@@ -63,6 +66,7 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 [plugins]
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }

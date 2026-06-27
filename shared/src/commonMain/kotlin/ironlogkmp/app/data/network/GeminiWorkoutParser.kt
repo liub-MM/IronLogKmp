@@ -3,6 +3,7 @@ package ironlogkmp.app.data.network
 import dev.shreyaspatil.ai.client.generativeai.GenerativeModel
 import dev.shreyaspatil.ai.client.generativeai.type.content
 import dev.shreyaspatil.ai.client.generativeai.type.generationConfig
+import ironlogkmp.app.shared.config.BuildKonfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
@@ -17,7 +18,7 @@ class GeminiWorkoutParser {
 
     private val generativeModel = GenerativeModel(
         modelName = "gemini-2.5-flash",
-        apiKey = "ТВІЙ_КЛЮЧ_ПОКИ_ТУТ",
+        apiKey = BuildKonfig.GEMINI_API_KEY,
         generationConfig = generationConfig {
             responseMimeType = "application/json"
         },

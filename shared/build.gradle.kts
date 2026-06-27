@@ -1,4 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
+import java.io.FileInputStream
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,6 +11,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -35,6 +39,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
+            implementation(libs.paging.compose)
             implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
@@ -48,8 +53,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
             implementation(libs.room.paging)
-            implementation(libs.paging.common)
-//            implementation(libs.paging.compose)
+            implementation(libs.paging.compose.common)
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.generativeai.kmp)
@@ -58,6 +62,7 @@ kotlin {
             implementation(libs.material.icons.extended)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
             implementation(libs.navigation.compose)
             implementation(libs.kotlinx.serialization.json)
         }
@@ -76,4 +81,20 @@ dependencies {
 }
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+
+buildkonfig {
+    packageName = "ironlogkmp.app.shared.config"
+
+    defaultConfigs {
+        val apiKey = localProperties.getProperty("GEMINI_API_KEY") ?: "KEY_NOT_FOUND"
+
+        buildConfigField(STRING, "GEMINI_API_KEY", apiKey)
+    }
 }

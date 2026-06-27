@@ -20,9 +20,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import ironlogkmp.app.presentation.screen.HistoryScreen
 import ironlogkmp.app.presentation.screen.HomeScreen
-import ironlogkmp.app.presentation.screen.ProgressScreen
+import ironlogkmp.app.presentation.screen.WorkoutDetailsScreen
+import ironlogkmp.app.shared.presentation.screen.ProgressScreen
 
 @Composable
 fun AppNavHost(
@@ -40,20 +42,26 @@ fun AppNavHost(
             modifier = modifier.padding(innerPadding),
         ) {
             composable<NavRoute.Home> {
-                HomeScreen {
-                    navController.navigate(NavRoute.History)
-                }
+                HomeScreen()
+
             }
 
             composable<NavRoute.History> {
                 HistoryScreen {
-                    navController.navigate(NavRoute.Progress)
-
+                    navController.navigate(NavRoute.WorkoutDetails(it))
                 }
             }
 
             composable<NavRoute.Progress> {
-                ProgressScreen {}
+                ProgressScreen()
+            }
+            composable<NavRoute.WorkoutDetails> { backStackEntry ->
+                val route = backStackEntry.toRoute<NavRoute.WorkoutDetails>()
+
+                WorkoutDetailsScreen(
+                    onBackClick = { navController.popBackStack() },
+                    workoutId = route.workoutId
+                )
             }
         }
     }
