@@ -50,6 +50,10 @@ class WorkoutRepositoryImpl(
 
         if (result.isSuccess) {
             val aiWorkoutResponse = result.getOrNull()!!
+
+            if (aiWorkoutResponse.exercises.isEmpty()) {
+                return Result.failure(Exception("ШІ не знайшов жодної вправи. Опиши тренування детальніше!"))
+            }
             return try {
                 val time = getCurrentSystemTime()
                 val workout = WorkoutEntity(
