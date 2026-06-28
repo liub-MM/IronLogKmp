@@ -9,16 +9,29 @@ workflows:
     scripts:
       - name: Create local.properties (API Key Mock)
         script: |
-           echo "GEMINI_API_KEY=dummy_key_for_simulator" > local.properties
+          echo "GEMINI_API_KEY=dummy_key_for_simulator" > local.properties
 
-      - name: Build iOS App for Simulator
-
+      - name: Generate Podfile and Install Firebase
         script: |
-          chmod +x gradlew
-       
           cd iosApp
           
+          cat <<EOF > Podfile
+          platform :ios, '14.0'
+          use_frameworks!
+          
+          target 'iosApp' do
+            pod 'FirebaseCore'
+            pod 'FirebaseAuth'
+            pod 'FirebaseFirestore'
+          end
+          EOF
+          
           pod install
+
+      - name: Build iOS App for Simulator
+        script: |
+          chmod +x gradlew
+          cd iosApp
           
           xcodebuild build \
             -workspace iosApp.xcworkspace \
@@ -29,7 +42,6 @@ workflows:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             -derivedDataPath ../build_ios
-         
 
       - name: Package .app into .zip for Appetize.io
         script: |
