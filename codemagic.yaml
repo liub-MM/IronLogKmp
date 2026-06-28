@@ -18,8 +18,10 @@ workflows:
        
           cd iosApp
           
+          pod install
+          
           xcodebuild build \
-            -project iosApp.xcodeproj \
+            -workspace iosApp.xcworkspace \
             -scheme iosApp \
             -sdk iphonesimulator \
             -configuration Debug \
@@ -27,6 +29,7 @@ workflows:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             -derivedDataPath ../build_ios
+         
 
       - name: Package .app into .zip for Appetize.io
         script: |
