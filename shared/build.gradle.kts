@@ -40,7 +40,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.paging.compose)
-            implementation(libs.room.paging)
+                // implementation(libs.room.paging)
             implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
@@ -53,7 +53,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
-            //implementation(libs.room.paging)
+            implementation(libs.room.paging)
             implementation(libs.paging.compose.common)
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
