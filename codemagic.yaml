@@ -9,17 +9,15 @@ workflows:
     scripts:
       - name: Create local.properties (API Key Mock)
         script: |
-          # Оскільки ти не заливав local.properties на GitHub (і це правильно!),
-          # Codemagic впаде з помилкою, бо BuildKonfig не знайде змінну.
-          # Тому ми створюємо фейковий ключ чисто для того, щоб додаток скомпілювався.
-          echo "GEMINI_API_KEY=dummy_key_for_simulator" > local.properties
+           echo "GEMINI_API_KEY=dummy_key_for_simulator" > local.properties
 
       - name: Build iOS App for Simulator
+
         script: |
-          # Заходимо в папку iOS
+          chmod +x gradlew
+       
           cd iosApp
           
-          # Запускаємо Xcode компілятор (без вимоги цифрових підписів)
           xcodebuild build \
             -project iosApp.xcodeproj \
             -scheme iosApp \
@@ -32,10 +30,8 @@ workflows:
 
       - name: Package .app into .zip for Appetize.io
         script: |
-          # Знаходимо скомпілюваний .app файл і пакуємо його в архів
           cd build_ios/Build/Products/Debug-iphonesimulator
           zip -r ../../../../IronLog_iOS_Simulator.zip *.app
 
     artifacts:
-      # Це те, що Codemagic видасть тобі в кінці для скачування
       - IronLog_iOS_Simulator.zip
