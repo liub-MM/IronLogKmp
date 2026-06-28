@@ -1,0 +1,41 @@
+workflows:
+  ios-simulator-build:
+    name: iOS Simulator Build (for Appetize.io)
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      java: 17
+      xcode: latest
+    scripts:
+      - name: Create local.properties (API Key Mock)
+        script: |
+          # Оскільки ти не заливав local.properties на GitHub (і це правильно!),
+          # Codemagic впаде з помилкою, бо BuildKonfig не знайде змінну.
+          # Тому ми створюємо фейковий ключ чисто для того, щоб додаток скомпілювався.
+          echo "GEMINI_API_KEY=dummy_key_for_simulator" > local.properties
+
+      - name: Build iOS App for Simulator
+        script: |
+          # Заходимо в папку iOS
+          cd iosApp
+          
+          # Запускаємо Xcode компілятор (без вимоги цифрових підписів)
+          xcodebuild build \
+            -project iosApp.xcodeproj \
+            -scheme iosApp \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            -derivedDataPath ../build_ios
+
+      - name: Package .app into .zip for Appetize.io
+        script: |
+          # Знаходимо скомпілюваний .app файл і пакуємо його в архів
+          cd build_ios/Build/Products/Debug-iphonesimulator
+          zip -r ../../../../IronLog_iOS_Simulator.zip *.app
+
+    artifacts:
+      # Це те, що Codemagic видасть тобі в кінці для скачування
+      - IronLog_iOS_Simulator.zip
