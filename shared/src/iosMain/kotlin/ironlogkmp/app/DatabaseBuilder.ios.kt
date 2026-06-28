@@ -21,7 +21,5 @@ fun getDatabaseBuilder(): RoomDatabase.Builder<IronLogDatabase> {
 
     return Room.databaseBuilder<IronLogDatabase>(
         name = dbFilePath,
-        factory = { IronLogDatabase::class.instantiateImpl() }
-
     )
 }
